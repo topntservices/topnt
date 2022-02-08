@@ -44,19 +44,19 @@
               <ul>
                 <div class="togle_3">
                   <div class="menu_main">
-                    <div class="padding_left0"><a href="#">Register</a>
-                    <span class="padding_left0"><a href="#">Login</a></span></div>
+                    <div class="padding_left0"><a href="#"></a>
+                    <span class="padding_left0"><a href="contact.html">Contact Us</a></span></div>
                   </div>
-                  <div class="shoping_bag"><img src="images/search-icon.png"></div>
+                  <!-- <div class="shoping_bag"><img src="images/search-icon.png"></div> -->
                 </div> 
                 <div id="myNav" class="overlay">
                 <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
                 <div class="overlay-content">
                   <a href="index.html">Home</a>
-                  <a href="services.html">Services</a>
+                  <a href="team.html">Services</a>
                   <a href="about.html">About</a>
-                  <a href="choose.html">Choose</a>
-                  <a href="team.html">Team</a>
+                  <!-- <a href="choose.html">Choose</a> -->
+                  <!-- <a href="team.html">Team</a> -->
                   <a href="contact.html">Contact Us</a>
                 </div>
                 </div>
@@ -77,40 +77,44 @@
             <h1 class="contact_taital"><span>Contact </span> <img src="images/icon-2.png"> <span>Us</span></h1>
           </div>
           <div class="footer_left">
-            <div class="location_text"><a href="#"><img src="images/map-icon.png"><span class="padding_left_15">Locations</span></a></div>
+            <!-- <div class="location_text"><span><span class="padding_left_15">ABN  18 656 588 395 / ACN 656588395</span></span></div> -->
           </div>
           <div class="footer_left">
-            <div class="location_text"><a href="#"><img src="images/call-icon.png"><span class="padding_left_15">+71 9876543210</span></a></div>
+            <div class="location_text"><a href="#"><img src="images/call-icon.png"><span class="padding_left_15"><a href="tel:+61 422892160">+61 422892160</a> </span></a></div>
           </div>
           <div class="footer_left">
-            <div class="location_text"><a href="#"><img src="images/map-icon.png"><span class="padding_left_15">demo@gmail.com</span></a></div>
+            <div class="location_text"><a href="#"><span class="padding_left_15">topntservices@gmail.com</span></a></div>
           </div>
         </div>
         <div class="contact_section">
           <div class="row">
             <div class="col-md-6">
               <div class="mail_section">
-                <input type="" class="email_text" placeholder="Name" name="Name">
-                <input type="" class="email_text" placeholder="Email" name="Email">
-                <input type="" class="email_text" placeholder="Phone Number" name="Phone Number">
-                <textarea class="massage_text" placeholder="Message" rows="5" id="comment" name="Message"></textarea>
-                <div class="send_bt"><a href="#">send</a></div>
+                <form id="form" >
+                  <input id="contact_name" required type="" class="email_text" placeholder="Name" name="Name">
+                <input id="contact_email" type="" required class="email_text" placeholder="Email" name="Email">
+                <input id="contact_number" type="" required class="email_text" placeholder="Phone Number" name="Phone Number">
+                <textarea id="contact_message" required class="massage_text" placeholder="Message" rows="5" id="comment" name="Message"></textarea>
+                <button type="submit" class="send_bt" style="background:none;"><a >send</a></button>
+                </form>
               </div>
             </div>
             <div class="col-md-6">
-              <div class="map_main">
+              <div class="">
                 <div class="map-responsive">
-                  <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&q=Eiffel+Tower+Paris+France" width="600" height="280" frameborder="0" style="border:0; width: 100%;" allowfullscreen></iframe>
+                  <div class="image_3"><img src="images/img-3.png"></div>
                 </div>
               </div>
-              <div class="social_icon">
+            <div class="location_text"><span><span class="padding_left_15">ABN  18 656 588 395 / ACN 656588395</span></span></div>
+
+              <!-- <div class="social_icon">
                 <ul>
                   <li><a href="#"><img src="images/fb-icon1.png"></a></li>
                   <li><a href="#"><img src="images/twitter-icon1.png"></a></li>
                   <li><a href="#"><img src="images/linkden-icon1.png"></a></li>
                   <li><a href="#"><img src="images/instagram-icon1.png"></a></li>
                 </ul>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
@@ -120,7 +124,7 @@
     <!-- copyright section start -->
     <div class="copyright_section">
       <div class="container">
-        <p class="copyright_text">Copyright 2020 All Right Reserved By <a href="https://html.design">Free html  Templates</a></p>
+        <p class="copyright_text">Copyright 2022 All Right Reserved By TOP NT CLEANING SERVICES</p>
       </div>
     </div>
     <!-- copyright section end -->
@@ -159,6 +163,37 @@
      function closeNav() {
      document.getElementById("myNav").style.width = "0%";
     }
+    const form = document.getElementById('form');
+form.addEventListener('submit',(e)=>{
+  e.preventDefault();
+  // sendEmail({
+  //   firstName:document.getElementById('contact_name').value,
+  //   contactNo:document.getElementById('contact_number').value,
+  //   email:document.getElementById('contact_email').value,
+  //   message:document.getElementById('contact_message').value
+  // })
+
+  body = {
+    name: document.getElementById('contact_name').value,
+    contactno: document.getElementById('contact_number').value,
+    email: document.getElementById('contact_email').value,
+    message: document.getElementById('contact_message').value
+  }
+
+  fetch(' https://topntmailservice.herokuapp.com/sendmail' , {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body)
+        }).then(() => {
+          alert("Message sent sucessfully");
+          document.getElementById('contact_name').value = "";
+          document.getElementById('contact_number').value = "";
+          document.getElementById('contact_email').value = "";
+          document.getElementById('contact_message').value = "";
+        })
+  
+
+})
     </script>  
 </body>
 </html>
